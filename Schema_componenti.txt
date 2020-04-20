@@ -1,0 +1,25 @@
+Header
+    menu
+        ricerca
+        links
+        bottone
+
+
+Gruppo Film
+    Titolo tipologia
+    
+    Scheda Film
+        Immagine
+        Titolo
+        Links -> regista/attori/genere
+        Rating
+        Descrizione
+
+Film
+    Immagine
+    Titolo
+    Links -> regista/attori/genere
+    Rating
+    Descrizione
+
+
