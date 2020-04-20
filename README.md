@@ -1,4 +1,18 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sanvi Movies
+
+Questo progetto vuole creare una piccola web app per il recupero di film e serie tv da trakt.tv, tramite le sue API pubbliche https://trakt.docs.apiary.io/.
+
+Per questo progetto ho scelto react, perché finora ci ho solo giocato e non ho mai creato un vero progetto, questo potrebbe essere una buona base per testarne le capacità.
+
+---
+
+## Obiettivo
+
+Scopo del progetto è poter avere una pagina di suggerimenti per film e serie tv, da cui poter scegliere, filtrare, cercare.
+
+La parte principale sarà in una pagina **"RANDOM"** dove compariranno alcuni film e serie tv casuali divisi anche per genere
+
+---
 
 ## Available Scripts
 
@@ -36,33 +50,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
