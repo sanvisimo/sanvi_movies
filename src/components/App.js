@@ -14,7 +14,7 @@ function App() {
         <header className="App-header">
           <Header />
         </header>
-        <section>
+        <section className="main">
           <Switch>
             <Route exact path="/">
               <Home />
