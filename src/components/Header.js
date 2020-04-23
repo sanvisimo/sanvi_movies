@@ -1,26 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Header.sass";
 
-class Header extends React.Component {
-  render() {
-    return (
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/movies">Movies</Link>
-        </li>
-        <li>
-          <Link to="/series">Serie</Link>
-        </li>
-        <li>
-          <Link to="/random">Random</Link>
-        </li>
-      </ul>
-    );
-  }
-}
+const LinkList = ({ path, label }) => (
+  <li className="px-4 py-2 m-2">
+    <Link to={path}>{label}</Link>
+  </li>
+);
+
+const Header = ({ routes }) => (
+  <div>
+    <ul className="container mx-auto flex justify-end">
+      {routes.map((l) =>
+        l.path === "/search" ? "" : <LinkList path={l.path} label={l.label} />
+      )}
+    </ul>
+  </div>
+);
 
 export default Header;
