@@ -23,14 +23,6 @@ export default class SliderGlide extends Component {
   render = () => (
     // controls
     <div id={this.state.id} className="slider glide">
-      <div className="two-controls-btns" data-glide-el="controls">
-        <button className="arrow-left" data-glide-dir="<" title="start">
-          <span className="hidden">Start</span>
-        </button>
-        <button className="arrow-right" data-glide-dir=">" title="end">
-          <span className="hidden">End</span>
-        </button>
-      </div>
       {/* track  */}
       <div className="glide__track" data-glide-el="track">
         <div className="glide__slides" style={{ display: "flex" }}>
@@ -46,8 +38,8 @@ export default class SliderGlide extends Component {
       {this.props.arrows ? (
         <div data-glide-el="controls">
           <button
-            className="absolute left-0 rounded-full p-2 bg-teal-500 transition-opacity duration-150 ease-in delay-300 -translate-y-1/2 cursor-pointer z-10"
-            style={{ top: "50%" }}
+            className="absolute rounded-full p-2 bg-teal-500 transition-opacity duration-150 ease-in delay-300 -translate-y-1/2 cursor-pointer z-10"
+            style={{ top: "50%", left: "-18px" }}
             data-glide-dir="<"
           >
             <svg
@@ -62,8 +54,8 @@ export default class SliderGlide extends Component {
           </button>
 
           <button
-            className="absolute right-0 rounded-full p-2 bg-teal-500 transition-opacity duration-150 ease-in delay-300 -translate-y-1/2 cursor-pointer z-10"
-            style={{ top: "50%" }}
+            className="absolute rounded-full p-2 bg-teal-500 transition-opacity duration-150 ease-in delay-300 -translate-y-1/2 cursor-pointer z-10"
+            style={{ top: "50%", right: "-18px" }}
             data-glide-dir=">"
           >
             <svg

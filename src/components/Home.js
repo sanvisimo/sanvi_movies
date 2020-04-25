@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <div id="home">
-      <section className="grid grid-cols-2 gap-2 home__section">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-2 home__section">
         {["shows", "movies"].map((el, i) => (
           <Top title={el} elements={movies} key={i} />
         ))}
