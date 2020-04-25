@@ -32,14 +32,6 @@ const Home = () => {
           </Suspense>
         ))}
       </section>
-      <section className="py-6 home__section">
-        <h2>TOP 10 Metracritic</h2>
-        <Carousel options={carouselOptions} arrows>
-          {movies.map((m, i) => (
-            <MovieCard key={`meta-${i}`} />
-          ))}
-        </Carousel>
-      </section>
     </div>
   );
 };
