@@ -10,17 +10,14 @@ const routes = [
   {
     path: "/",
     label: "Home",
-    Component: Home,
   },
   {
-    path: "/movies",
+    path: "/movie",
     label: "Film",
-    Component: Random,
   },
   {
-    path: "/shows",
+    path: "/show",
     label: "Serie",
-    Component: Shows,
   },
   {
     path: "/search",
@@ -38,16 +35,16 @@ function App() {
         </header>
         <section id="main" className="flex flex-col w-3/4 mx-auto my-12">
           <Switch>
-            {routes.map(({ path, Component }, i) => (
-              <Route
-                key={`route-${i}`}
-                exact
-                path={path}
-                component={({ history }) => {
-                  return <Component />;
-                }}
-              />
-            ))}
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route
+              path="/:type"
+              exact
+              render={(routeProps) => (
+                <Random {...routeProps} key={document.location.href} />
+              )}
+            />
           </Switch>
         </section>
       </Router>
