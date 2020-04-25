@@ -8,7 +8,7 @@ const MovieGenre = ({ movie, genre }) => {
       <MovieCard
         key={`top-random-movie}`}
         movie={movie}
-        type="movie"
+        type="show"
         proportion="4/3"
       />
     </div>
@@ -20,9 +20,13 @@ const Random = () => {
     "action",
     "adventure",
     "animation",
+    "anime",
+    "biography",
     "comedy",
     "crime",
     "drama",
+    "mini-series",
+    "mystery",
     "fantasy",
     "history",
     "horror",
@@ -30,6 +34,7 @@ const Random = () => {
     "science-fiction",
     "superhero",
     "suspense",
+    "thriller",
   ];
   const [hasError, setErrors] = useState(false);
   // const [movies, setMovies] = useState([]);
@@ -45,7 +50,7 @@ const Random = () => {
           "2530797cb2d331afb002eb9cc2a89f1c35a8c31315be0442915cd9573d878005",
       });
       const res = await fetch(
-        "https://api.trakt.tv/movies/trending?limit=1000&extended=full",
+        "https://api.trakt.tv/shows/trending?limit=1000&extended=full",
         {
           headers,
         }
@@ -57,7 +62,7 @@ const Random = () => {
           // setMovies(res);
           setMovie(res[Math.ceil(Math.random() * 1000)]);
           let a = genres.map((genre) => {
-            let m = res.filter((m) => m.movie.genres.includes(genre));
+            let m = res.filter((m) => m.show.genres.includes(genre));
             return m[Math.ceil(Math.random() * m.length)];
           });
           setMoviesGenre(a);
@@ -77,8 +82,8 @@ const Random = () => {
               {!!movie ? (
                 <MovieCard
                   key={`top-random-movie}`}
-                  movie={movie.movie}
-                  type="movie"
+                  movie={movie.show}
+                  type="show"
                   proportion="4/3"
                 />
               ) : (
@@ -92,7 +97,7 @@ const Random = () => {
                 return mg ? (
                   <MovieGenre
                     key={`meta-${i}`}
-                    movie={mg.movie}
+                    movie={mg.show}
                     genre={genres[i]}
                   />
                 ) : (

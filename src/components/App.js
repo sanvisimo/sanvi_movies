@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
-import Page from "./Page";
+import Shows from "./Shows";
 import Random from "./Random";
 import Search from "./Search";
 
@@ -15,17 +15,12 @@ const routes = [
   {
     path: "/movies",
     label: "Film",
-    Component: Page,
-  },
-  {
-    path: "/series",
-    label: "Serie",
-    Component: Page,
-  },
-  {
-    path: "/random",
-    label: "Random",
     Component: Random,
+  },
+  {
+    path: "/shows",
+    label: "Serie",
+    Component: Shows,
   },
   {
     path: "/search",

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import MovieCard from "./MovieCard/MovieCard";
 import Carousel from "./Carousel";
-import Top from "./Home/Top";
+
+const Top = React.lazy(() => import("./Home/Top"));
 
 const Home = () => {
   const movies = [...Array(10).keys()].map((x) => ++x);
@@ -25,8 +26,10 @@ const Home = () => {
   return (
     <div id="home">
       <section className="grid grid-cols-1 md:grid-cols-2 gap-2 home__section">
-        {["shows", "movies"].map((el, i) => (
-          <Top title={el} elements={movies} key={i} />
+        {["show", "movie"].map((el, i) => (
+          <Suspense fallback={<h1>Loading top {el}...</h1>}>
+            <Top title={el} key={i} />
+          </Suspense>
         ))}
       </section>
       <section className="py-6 home__section">
