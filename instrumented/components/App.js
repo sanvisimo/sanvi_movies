@@ -41,7 +41,7 @@ function App() {
         <header className="App-header">
           <Header routes={routes} />
         </header>
-        <section id="main" className="flex flex-col w-3/4 mx-auto my-12">
+        <section className="main flex flex-col w-3/4 mx-auto my-12 items-center">
           <Switch>
             {routes.map(({ path, Component }, i) => (
               <Route

@@ -7,7 +7,7 @@ describe("<App/>", () => {
   });
 
   it("Default render", () => {
-    cy.get("section").should("have.class", "main");
+    cy.get("#main").should("have.length", 1);
   });
 
   it("default component", () => {

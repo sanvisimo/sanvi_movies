@@ -2,20 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const LinkList = ({ path, label }) => (
-  <li className="px-4 py-2 m-2 bg-teal-400">
+  <li className="px-4 py-2 m-2">
     <Link to={path}>{label}</Link>
   </li>
 );
 
 const Header = ({ routes }) => (
-  <div className="bg-teal-700 border-b border-gray-800 shadow-lg">
+  <div>
     <ul className="container mx-auto flex justify-end">
-      {routes.map((l, i) =>
-        l.path === "/search" ? (
-          ""
-        ) : (
-          <LinkList path={l.path} label={l.label} key={`link-${i}`} />
-        )
+      {routes.map((l) =>
+        l.path === "/search" ? "" : <LinkList path={l.path} label={l.label} />
       )}
     </ul>
   </div>

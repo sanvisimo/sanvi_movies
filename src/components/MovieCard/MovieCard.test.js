@@ -1,8 +1,7 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
-import { act, findRenderedDOMComponentWithClass } from "react-dom/test-utils";
-import Home from "./home";
-import { shallow } from "enzyme";
+import { act } from "react-dom/test-utils";
+import MovieCard from "./MovieCard";
 
 let container = null;
 beforeEach(() => {
@@ -20,10 +19,18 @@ afterEach(() => {
 
 it("works", () => {
   act(() => {
-    render(<Home />, container);
+    render(<MovieCard />, container);
   });
+  const title = document.querySelector("h2");
+  expect(title.innerHTML).toBe("C'era una volta ad Hollywood...");
+});
 
-  expect(container.querySelector("h2")).toEqual("TOP 10 Metracritic");
+it("title props", () => {
+  act(() => {
+    render(<MovieCard title="Aquile Randagie" />, container);
+  });
+  const title = document.querySelector("h2");
+  expect(title.innerHTML).toBe("Aquile Randagie");
 });
 
 // it("Renders without crashing", () => {

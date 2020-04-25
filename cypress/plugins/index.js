@@ -15,7 +15,10 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+
+module.exports = (on) => {
+  on(
+    "file:preprocessor",
+    require("cypress-react-unit-test/plugins/cra-v3/file-preprocessor")
+  );
 };
