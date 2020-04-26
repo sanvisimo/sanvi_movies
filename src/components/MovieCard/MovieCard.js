@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./MovieCard.css";
+import Loader from "../ui/Loader";
 
 const MovieCard = ({ movie, proportion, type }) => {
   const m = movie || {};
@@ -9,7 +10,7 @@ const MovieCard = ({ movie, proportion, type }) => {
 
   const [hasError, setErrors] = useState(false);
   const [people, setPeople] = useState([]);
-  const [poster, setPoster] = useState("");
+  const [poster, setPoster] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -55,11 +56,17 @@ const MovieCard = ({ movie, proportion, type }) => {
       {!hasError ? (
         <div className="bg-white">
           <div className={className}>
-            <img
-              className="absolute h-full w-full object-cover"
-              src={poster}
-              alt={m.title}
-            />
+            {!poster ? (
+              <div className="w-full h-full flex justify-center items-center absolute">
+                <Loader />
+              </div>
+            ) : (
+              <img
+                className="absolute h-full w-full object-cover"
+                src={poster}
+                alt={m.title}
+              />
+            )}
             <div className="absolute bottom-0 left-0 p-4 bg-red-500 card__title text-white w-full">
               <h2 className="mb-5 font-bold text-md xl:text-lg leading-tight w-full">
                 {m.title}

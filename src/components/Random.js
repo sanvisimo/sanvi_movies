@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { withRouter, useRouteMatch } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import MovieCard from "./MovieCard/MovieCard";
+import Loader from "./ui/Loader";
 
 const MovieGenre = ({ movie, genre, type }) => {
   return (
@@ -93,7 +94,9 @@ const Random = ({ match, history }) => {
                   proportion="4/3"
                 />
               ) : (
-                "loading..."
+                <div className="flex w-full justify-center items-center">
+                  <Loader />
+                </div>
               )}
             </div>
           </section>

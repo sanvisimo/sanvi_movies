@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "../Carousel";
 import MovieCard from "../MovieCard/MovieCard";
+import Loader from "../ui/Loader";
 
 const Top = (props) => {
   const title = props.title || "movies";
@@ -52,7 +53,9 @@ const Top = (props) => {
           ))}
         </Carousel>
       ) : (
-        "loading..."
+        <div className="flex w-full justify-center items-center">
+          <Loader />
+        </div>
       )}
     </div>
   );
