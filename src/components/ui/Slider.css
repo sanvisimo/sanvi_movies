@@ -1,0 +1,24 @@
+.noUi-horizontal {
+  height: 10px;
+}
+
+.noUi-horizontal .noUi-handle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #38b2ac;
+  cursor: pointer;
+}
+
+.noUi-handle:before,
+.noUi-handle:after {
+  display: none;
+}
+
+.noUi-horizontal .noUi-tooltip {
+  bottom: -1.7rem;
+  background-color: #b2f5ea;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 2px 5px;
+}

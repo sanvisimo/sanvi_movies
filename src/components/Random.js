@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { withRouter } from "react-router-dom";
 import MovieCard from "./MovieCard/MovieCard";
 import Loader from "./ui/Loader";
+import Filter from "./ui/Filter";
 
 const MovieGenre = ({ movie, genre, type }) => {
   return (
@@ -17,7 +18,7 @@ const MovieGenre = ({ movie, genre, type }) => {
   );
 };
 
-const Random = ({ match, history }) => {
+const Random = ({ match }) => {
   const genres = [
     "action",
     "adventure",
@@ -31,21 +32,48 @@ const Random = ({ match, history }) => {
     "romance",
     "science-fiction",
     "superhero",
-    "suspense",
   ];
-  const [type, setType] = useState(match.params.type);
+
+  function handleClick() {
+    if (movies.length > 0) {
+      const a = movies.slice(0, 5).reduce((total, obj) => {
+        let g = obj[state.type].genres;
+        g.map((ge) => {
+          if (!total.includes(ge)) {
+            total.push(ge);
+          }
+          return total;
+        });
+        return total;
+      }, []);
+      setFilterGenres(a);
+      setIsOpen(!isOpen);
+    }
+  }
+
+  function init(type) {
+    return { type };
+  }
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case "init":
+        return init(action.payload);
+      default:
+        throw new Error();
+    }
+  }
+  // const [type, setType] = useState(match.params.type);
+  const [state, dispatch] = useReducer(reducer, match.params.type, init);
+  const [isOpen, setIsOpen] = useState(true);
   const [hasError, setErrors] = useState(false);
-  // const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [movie, setMovie] = useState(null);
   const [moviesGenre, setMoviesGenre] = useState([]);
-
-  history.listen((location, action) => {
-    console.log("on route change", location.pathname.replace("/", ""));
-    setType("show");
-  });
+  const [filterGenres, setFilterGenres] = useState([]);
 
   useEffect(() => {
-    setType(match.params.type);
+    dispatch({ type: "init", payload: match.params.type });
     async function fetchData() {
       const headers = new Headers({
         "Content-type": "application/json",
@@ -54,7 +82,7 @@ const Random = ({ match, history }) => {
           "2530797cb2d331afb002eb9cc2a89f1c35a8c31315be0442915cd9573d878005",
       });
       const res = await fetch(
-        `https://api.trakt.tv/${type}s/trending?limit=1000&extended=full`,
+        `https://api.trakt.tv/${state.type}s/trending?limit=1000&extended=full`,
         {
           headers,
         }
@@ -63,24 +91,29 @@ const Random = ({ match, history }) => {
       res
         .json()
         .then((res) => {
-          // setMovies(res);
+          setMovies(res);
           setMovie(res[Math.ceil(Math.random() * 1000)]);
-          let a = genres.map((genre) => {
-            let m = res.filter((m) => m[type].genres.includes(genre));
-            return m[Math.ceil(Math.random() * m.length)];
-          });
-          setMoviesGenre(a);
+          setMoviesGenre(
+            genres.map((genre) => {
+              let m = res.filter((m) => m[state.type].genres.includes(genre));
+              if (m.length > 0) {
+                return m[Math.ceil(Math.random() * m.length)];
+              }
+              return;
+            })
+          );
         })
         .catch((err) => setErrors(err));
     }
 
     fetchData();
-  }, [type]);
+  }, [state.type]);
 
   return (
-    <div id="home">
+    <div id="home" className="container mx-auto">
+      <Filter genres={filterGenres} onClick={handleClick} isOpen={isOpen} />
       <h1 className="font-serif mb-6 text-4xl lg:text-6xl font-bold text-teal-500 text-center">
-        RANDOM {type.toUpperCase()}
+        RANDOM {state.type.toUpperCase()}
       </h1>
       {!hasError ? (
         <div>
@@ -89,8 +122,8 @@ const Random = ({ match, history }) => {
               {!!movie ? (
                 <MovieCard
                   key={`top-random-movie}`}
-                  movie={movie[type]}
-                  type={type}
+                  movie={movie[state.type]}
+                  type={state.type}
                   proportion="4/3"
                 />
               ) : (
@@ -106,8 +139,8 @@ const Random = ({ match, history }) => {
                 return mg ? (
                   <MovieGenre
                     key={`meta-${i}`}
-                    movie={mg[type]}
-                    type={type}
+                    movie={mg[state.type]}
+                    type={state.type}
                     genre={genres[i]}
                   />
                 ) : (
@@ -118,7 +151,7 @@ const Random = ({ match, history }) => {
           </section>
         </div>
       ) : (
-        JSON.stringify(hasError)
+        <div>errori: {JSON.stringify(hasError)}</div>
       )}
     </div>
   );

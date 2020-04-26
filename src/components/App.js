@@ -32,7 +32,7 @@ function App() {
         <header className="App-header">
           <Header routes={routes} />
         </header>
-        <section id="main" className="flex flex-col w-3/4 mx-auto my-12">
+        <section id="main" className="my-12">
           <Switch>
             <Route exact path="/">
               <Home />

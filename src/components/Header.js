@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const LinkList = ({ path, label }) => (
-  <li className="px-4 py-2 m-2 bg-teal-400">
+  <li className="px-4 py-2 ml-2  my-2 bg-teal-400">
     <Link to={path}>{label}</Link>
   </li>
 );
