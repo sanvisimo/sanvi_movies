@@ -4,7 +4,7 @@ import "./MovieCard.css";
 import Loader from "../ui/Loader";
 
 const MovieCard = ({ movie, proportion, type }) => {
-  const m = movie || {};
+  const [m, setMovie] = useState(movie);
   const className = `relative pb-${proportion || "3/4"}`;
   // const stars = [...Array(5).keys()].map(x => ++x);
 
@@ -20,9 +20,9 @@ const MovieCard = ({ movie, proportion, type }) => {
         "trakt-api-key":
           "2530797cb2d331afb002eb9cc2a89f1c35a8c31315be0442915cd9573d878005",
       });
-      if (m.ids) {
+      if (movie.ids) {
         const res = await fetch(
-          `https://api.trakt.tv/${type}s/${m.ids.trakt}/people`,
+          `https://api.trakt.tv/${type}s/${movie.ids.trakt}/people`,
           {
             headers,
           }
@@ -30,7 +30,7 @@ const MovieCard = ({ movie, proportion, type }) => {
 
         const pos = await fetch(
           `https://api.themoviedb.org/3/${type === "movie" ? type : "tv"}/${
-            m.ids.tmdb
+            movie.ids.tmdb
           }?api_key=961e2944601818d62c61d92f009b78b2&language=en-US`
         );
 
@@ -47,9 +47,9 @@ const MovieCard = ({ movie, proportion, type }) => {
           .catch((err) => setErrors(err));
       }
     }
-
+    setMovie(movie);
     fetchData();
-  }, []);
+  }, [movie, type]);
 
   return (
     <div className="whitespace-normal">

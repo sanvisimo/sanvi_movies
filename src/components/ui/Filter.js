@@ -1,18 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import Checkbox from "./Checkbox";
 import Slider from "./Slider";
+import Button from "./Button";
 
 const years = (n) => {
   const date = new Date(),
     year = date.getFullYear() - n;
-  let years = ["older"];
+  let years = [];
   for (var i = year; i < year + n; i++) {
     years.push(i);
   }
   return [...years, date.getFullYear()].reverse();
 };
 
-const Filter = ({ genres, onClick, isOpen = false }) => {
+const Filter = ({ genres, onClick, isOpen = false, onFilter }) => {
+  const [genresSel, setGenresSel] = useState([]);
+  const [yearSel, setYearSel] = useState([]);
+  const [range, setRange] = useState([0, 10]);
+
+  const changeGenres = (val, element) => {
+    if (val) {
+      setGenresSel([...genresSel, element]);
+    } else {
+      setGenresSel(genresSel.filter((sel) => sel !== element));
+    }
+  };
+  const changeYears = (val, element) => {
+    if (val) {
+      setYearSel([...yearSel, element]);
+    } else {
+      setYearSel(yearSel.filter((sel) => sel !== element));
+    }
+  };
+
+  const changeRange = (render, handle, value, un, percent) => {
+    setRange(value);
+  };
+
   return (
     <div className=" relative w-full flex justify-end">
       <div className="cursor-pointer" onClick={onClick}>
@@ -26,35 +50,53 @@ const Filter = ({ genres, onClick, isOpen = false }) => {
 
       {isOpen ? (
         <div className="absolute right-0 mt-6 py-3 px-4 w-auto inline-block rounded-lg shadow-2xl bg-gray-300 z-50">
-          <div className="grid grid-cols-12">
-            <div className="col-span-12 md:col-span-10">
-              <div>
-                <h4>Generi</h4>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {genres.map((genre, i) => (
-                    <div key={`checboxContainer-${i}`}>
-                      <Checkbox label={genre} key={`checkbox-range-${i}`} />
+          <form onSubmit={onFilter(genresSel, yearSel, range)}>
+            <div className="grid grid-cols-12">
+              <div className="col-span-12 md:col-span-10">
+                <div>
+                  <h4>Generi</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                    {genres.map((genre, i) => (
+                      <div key={`checboxContainer-${i}`}>
+                        <Checkbox
+                          label={genre}
+                          key={`checkbox-range-${i}`}
+                          onChange={changeGenres}
+                          value={genre}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="w-11/12 mt-2 mb-6">
+                  <h4>Rating</h4>
+                  <Slider
+                    min={0}
+                    max={10}
+                    range={range}
+                    onUpdate={changeRange}
+                  />
+                </div>
+              </div>
+
+              <div className="col-span-12 md:col-span-2">
+                <h4>Anni</h4>
+                <div className="grid grid-cols-3 md:grid-cols-1">
+                  {years(5).map((year, i) => (
+                    <div key={`yearContainer-${i}`}>
+                      <Checkbox
+                        label={year}
+                        key={`checkbox-year-${i}`}
+                        onChange={changeYears}
+                        value={year}
+                      />
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="w-11/12 mt-2 mb-6">
-                <h4>Rating</h4>
-                <Slider />
-              </div>
             </div>
-
-            <div className="col-span-12 md:col-span-2">
-              <h4>Anni</h4>
-              <div class="grid grid-cols-3 md:grid-cols-1">
-                {years(5).map((year, i) => (
-                  <div key={`yearContainer-${i}`}>
-                    <Checkbox label={year} key={`checkbox-year-${i}`} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+            <Button label="Filtra" />
+          </form>
         </div>
       ) : (
         ""
