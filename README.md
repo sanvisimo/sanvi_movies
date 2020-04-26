@@ -2,7 +2,7 @@
 
 Questo progetto vuole creare una piccola web app per il recupero di film e serie tv da trakt.tv, tramite le sue API pubbliche https://trakt.docs.apiary.io/.
 
-Per questo progetto ho scelto react, perché finora ci ho solo giocato e non ho mai creato un vero progetto, questo potrebbe essere una buona base per testarne le capacità.
+Per questo progetto ho scelto come framework frontend react, perché finora ci ho solo giocato e non ho mai creato un vero progetto, questo potrebbe essere una buona base per testarne le capacità.
 
 ---
 
@@ -16,12 +16,14 @@ La parte principale sarà in una pagina **"RANDOM"** dove compariranno alcuni fi
 
 ## ToDo
 
-- da creare gli unit test delle azioni e controllare i test e2e con cypress
+- da creare gli unit test dei metodi e controllare i test e2e con cypress
 - Refactoring del codice
 - Grafica degli Errori
 - spostare le api keys
 - useReducer sui filtri
 - sistemare Array dei Generi
+- Pagina film/serie tv con descrizione, e trailers
+- Pagina attore, con elenco films/serie tv
 
 ---
 
