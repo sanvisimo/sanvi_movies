@@ -14,6 +14,18 @@ const years = (n) => {
 };
 
 const Filter = ({ genres, onClick, isOpen = false, onFilter }) => {
+  // const reducer = (state, action) => {
+  //   switch (action.type) {
+  //     case "update":
+  //       let s = {...state};
+  //       s[action.index] = action.payload;
+  //       return s
+  //     default:
+  //       throw new Error();
+  //   }
+  // };
+  //
+  // const [state, dispatch] = useReducer(reducer, {genres: [], years: [], r: [0,10]});
   const [genresSel, setGenresSel] = useState([]);
   const [yearSel, setYearSel] = useState([]);
   const [range, setRange] = useState([0, 10]);
@@ -57,7 +69,7 @@ const Filter = ({ genres, onClick, isOpen = false, onFilter }) => {
                   <h4>Generi</h4>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                     {genres.map((genre, i) => (
-                      <div key={`checboxContainer-${i}`}>
+                      <div key={`checkboxContainer-${i}`}>
                         <Checkbox
                           label={genre}
                           key={`checkbox-range-${i}`}

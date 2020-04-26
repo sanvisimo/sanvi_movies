@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useReducer } from "react";
 import { withRouter } from "react-router-dom";
+import headers from "../utils";
 import MovieCard from "./MovieCard/MovieCard";
 import Loader from "./ui/Loader";
 import Filter from "./ui/Filter";
@@ -49,13 +50,11 @@ const Random = ({ match }) => {
     }
   };
 
-  // const [type, setType] = useState(match.params.type);
   const [state, dispatch] = useReducer(reducer, match.params.type, init);
   const [isOpen, setIsOpen] = useState(false);
   const [hasError, setErrors] = useState(false);
   const [movies, setMovies] = useState([]);
   const [movieError, setMovieError] = useState(null);
-  // const [moviesGenre, setMoviesGenre] = useState([]);
   const [filterGenres, setFilterGenres] = useState([]);
 
   function handleClick() {
@@ -90,12 +89,10 @@ const Random = ({ match }) => {
   };
 
   async function fetchData() {
-    const headers = new Headers({
-      "Content-type": "application/json",
-      "trakt-api-version": 2,
-      "trakt-api-key":
-        "2530797cb2d331afb002eb9cc2a89f1c35a8c31315be0442915cd9573d878005",
-    });
+    /***
+     * Questo codice andrebbe lanciato lato server
+     * Ci vorrebbe una API che randomizzi i risultati e restituisca semplicemente i valori, invece che calcolarla da client
+     */
     const res = await fetch(
       `https://api.trakt.tv/${state.type}s/trending?limit=1000&extended=full`,
       {
@@ -107,7 +104,6 @@ const Random = ({ match }) => {
       .json()
       .then((res) => {
         setMovies(res);
-        // setMovie(res[Math.ceil(Math.random() * 1000)]);
         dispatch({
           type: "updateMovie",
           payload: res[Math.ceil(Math.random() * 1000)],
@@ -117,7 +113,6 @@ const Random = ({ match }) => {
           type: "updateGenres",
           payload: changeGenres(genres, res),
         });
-        // setMoviesGenre(changeGenres(genres, res));
       })
       .catch((err) => setErrors(err));
   }
@@ -128,6 +123,10 @@ const Random = ({ match }) => {
   }, [state.type]);
 
   const filterResults = (g, years, range) => (e) => {
+    /***
+     * Questo codice andrebbe lanciato lato server
+     * Ci vorrebbe una API che randomizzi i risultati e restituisca semplicemente i valori, invece che calcolarla da client
+     */
     e.preventDefault();
 
     if (g.length === 0) g = genres;

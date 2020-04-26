@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import headers from "../../utils";
 import "./MovieCard.css";
 import Loader from "../ui/Loader";
 
@@ -14,12 +15,6 @@ const MovieCard = ({ movie, proportion, type }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const headers = new Headers({
-        "Content-type": "application/json",
-        "trakt-api-version": 2,
-        "trakt-api-key":
-          "2530797cb2d331afb002eb9cc2a89f1c35a8c31315be0442915cd9573d878005",
-      });
       if (movie.ids) {
         const res = await fetch(
           `https://api.trakt.tv/${type}s/${movie.ids.trakt}/people`,
@@ -76,8 +71,13 @@ const MovieCard = ({ movie, proportion, type }) => {
                   <div className="mt-1 text-md leading-tight block">
                     {people
                       ? people.slice(0, 3).map((person, i) => (
-                          <Link to="/" key={`people-${m.ids.trakt}-${i}`}>
+                          <Link
+                            to="/"
+                            key={`people-${m.ids.trakt}-${i}`}
+                            className="text-teal-300"
+                          >
                             {person.person.name}
+                            {i < 2 ? <span> &bull; </span> : "  "}
                           </Link>
                         ))
                       : "..."}

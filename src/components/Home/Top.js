@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Carousel from "../Carousel";
+import Carousel from "../ui/Carousel";
+import headers from "../../utils";
 import MovieCard from "../MovieCard/MovieCard";
 import Loader from "../ui/Loader";
 
@@ -11,12 +12,6 @@ const Top = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      const headers = new Headers({
-        "Content-type": "application/json",
-        "trakt-api-version": 2,
-        "trakt-api-key":
-          "2530797cb2d331afb002eb9cc2a89f1c35a8c31315be0442915cd9573d878005",
-      });
       const res = await fetch(
         `https://api.trakt.tv/${title}s/trending?limit=10&extended=full`,
         {
@@ -35,7 +30,7 @@ const Top = (props) => {
 
   return (
     <div
-      className="px-6 py-3 xl:px-24 xl:py-12 bg-teal-500"
+      className="px-6 pt-3 xl:px-24 xl:pt-12 pb-12 bg-teal-500"
       id={`top-${title}`}
     >
       <h2>TOP {title.toUpperCase()} LAST WEEK</h2>

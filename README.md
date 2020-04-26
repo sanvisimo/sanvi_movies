@@ -14,6 +14,17 @@ La parte principale sarà in una pagina **"RANDOM"** dove compariranno alcuni fi
 
 ---
 
+## ToDo
+
+- da creare gli unit test delle azioni e controllare i test e2e con cypress
+- Refactoring del codice
+- Grafica degli Errori
+- spostare le api keys
+- useReducer sui filtri
+- sistemare Array dei Generi
+
+---
+
 ## Available Scripts
 
 In the project directory, you can run:
