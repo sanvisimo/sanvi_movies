@@ -75,6 +75,7 @@ const Filter = ({ genres, onClick, isOpen = false, onFilter }) => {
                           key={`checkbox-range-${i}`}
                           onChange={changeGenres}
                           value={genre}
+                          checked={genresSel.includes(genre)}
                         />
                       </div>
                     ))}
@@ -101,6 +102,7 @@ const Filter = ({ genres, onClick, isOpen = false, onFilter }) => {
                         key={`checkbox-year-${i}`}
                         onChange={changeYears}
                         value={year}
+                        checked={yearSel.includes(year)}
                       />
                     </div>
                   ))}

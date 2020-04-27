@@ -1,7 +1,7 @@
 import React from "react";
 import "./Checkbox.css";
 
-const Checkbox = ({ label, value, onChange = (f) => f }) => {
+const Checkbox = ({ label, value, checked, onChange = (f) => f }) => {
   const handleChange = (e) => {
     onChange(e.target.checked, value);
   };
@@ -9,7 +9,12 @@ const Checkbox = ({ label, value, onChange = (f) => f }) => {
   return (
     <label className="custom-label flex items-center">
       <div className="bg-white shadow w-4 h-4 flex justify-center items-center mr-2">
-        <input type="checkbox" className="hidden" onChange={handleChange} />
+        <input
+          type="checkbox"
+          className="hidden"
+          onChange={handleChange}
+          checked={checked}
+        />
         <svg
           className="hidden w-6 h-6 text-teal-500 pointer-events-none"
           viewBox="0 0 172 172"

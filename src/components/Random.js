@@ -154,6 +154,7 @@ const Random = ({ match }) => {
       dispatch({ type: "updateMovie", payload: null });
       setMovieError("Spiacenti, Non ci sono film nella ricerca");
     }
+    setIsOpen(false);
   };
 
   return (
