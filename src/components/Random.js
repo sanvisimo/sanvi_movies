@@ -193,7 +193,7 @@ const Random = ({ match }) => {
           <section className="py-6 home__section">
             <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               {state.moviesGenre.map((mg, i) => {
-                return mg ? (
+                return mg && mg.movie ? (
                   <MovieGenre
                     key={`meta-${i}`}
                     movie={mg.movie[state.type]}
